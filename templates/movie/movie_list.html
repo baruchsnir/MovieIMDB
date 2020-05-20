@@ -1,0 +1,149 @@
+<head>
+    <title>Movies List</title>
+</head>
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+<table id="back2Top" style="display: inline;">
+  <col width="20"><col width="20"><col width="20"><col width="20"><col width="20">
+  <tr>
+      <td></td>
+      <td></td>
+      <td><a title="Back to top" href="/movie/movies_list/?page={{ current_page }}&year={{year}}&genres={{genres}}&review={{review}}" alt="Top"><img border="0" src="{% static '/images/top.jpg' %}" alt="Next" width="20" height="20"></a></td>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+         {% if current_page != 1 %}
+         <td>
+           <a title="First" href="/movie/movies_list/?page=1" style="display: inline;"><img border="0" src="{% static '/images/first.jpg' %}" alt="First" width="20" height="20"></a>
+         </td>
+         <td>
+            <a title="Previous" href="/movie/movies_list/?page={{ current_page|add:-1 }}&year={{year}}&genres={{genres}}&review={{review}}" alt="Previous" style="display: inline;"><img border="0" src="{% static '/images/previous.jpg' %}" alt="Next" width="20" height="20"> </a>
+         </td>
+         {% else %}
+                 <td></td>
+                 <td></td>
+         {% endif %}
+      <td>
+     </td>
+         {% if current_page != page_number %}
+         <td><a  title="Next" href="/movie/movies_list/?page={{ current_page|add:1 }}&year={{year}}&genres={{genres}}&review={{review}}" style="display: inline;"><img border="0" src="{% static '/images/next.jpg' %}" alt="First" width="20" height="20"></a>
+         </td>
+          <td>
+                       <a   title="Last" href="/movie/movies_list/?page={{ page_number }}&year={{year}}&genres={{genres}}&review={{review}}" style="display: inline;"><img border="0" src="{% static '/images/last.jpg' %}" alt="First" width="30" height="20"></a>
+         </td>
+         {% else %}
+                 <td width="30" height="30"></td>
+                 <td width="30" height="30"></td>
+        {% endif %}
+  </tr>
+ </table>
+    <div id="container" style="margin-left: 1%;">
+
+        <div style="margin-left: 1%;">
+        <table>
+        <div>
+            <ul class="nav navbar-nav" style="background-color:#FAFAD2;">
+
+        {% if years %}
+              <li class="search-actor  backcolor"  height="20" width="70">Years : </li>
+              <li>      <select id="years" name="select_year">
+                        {% for y in years %}
+                            {% if year == y %}
+                                <option selected value="{{ y }}">{{ y }}</option>
+                            {% else %}
+                               <option value="{{ y }}">{{ y }}</option>
+                            {% endif %}
+
+                        {% endfor %}
+                        </select>
+              </li>
+
+        {% endif %}
+        {% if genres %}
+        <li class="search-actor backcolor"  height="50" width="70" >       Genres : </li>
+        <li>
+                        <select id="genres" name="select_year">
+                        {% for g in genres %}
+                            {% if genre == g %}
+                                <option selected value="{{ g }}">{{ g }}</option>
+                            {% else %}
+                               <option value="{{ g }}">{{ g }}</option>
+                            {% endif %}
+
+                        {% endfor %}
+                        </select>
+        </li>
+        {% endif %}
+        {% if years or genres %}
+        <li class="search-actor backcolor" width="70" >
+            <button id="btnSelect" onclick="onSelectbtn();" type="button" class="btn-default">Select</button>
+        </li>
+        {% endif %}
+        </ul>
+        </div>
+        {% for item in items %}
+           {% if forloop.first %}
+              <tr>
+           {% endif %}
+             <td>
+            <table class="tblmovbie" >
+
+                <col width="30"><col width="200"><col width="30">
+                <tr>
+                <td>        </td>
+                <td>
+                    <a href="/movie/movie_detail/?id={{ item.movieid }}" target="_self"><img class="img-rounded" border="0" src="{{ item.poster }}" alt="Cannot load photo, sorry!" width="160" height="180"></a>
+                 </td>
+                <td></td>
+                </tr>
+                <tr style="background-color:#FAFAD2;">
+                <td style="vertical-align: top;text-align: left;padding: 0px;" width="125" height="170" colspan="2">
+                    <h3><a href="/movie/movie_detail/?id={{ item.movieid }}"
+                           target="_self">{{ item.title }}({{ item.year }})</a></h3>
+
+                    <span class="stars">{{ item.rate }}</span>
+                    <p class="stars">Rate: {{ item.rate }}</p>
+                    <br>
+                </td>
+                </tr>
+            </table>
+            <hr>
+             </td>
+            {% if forloop.counter|divisibleby:movies_in_line %}
+                </tr>
+            {% endif %}
+
+        {% endfor %}
+        </table>
+        </div>
+        {% if pages %}
+            <p>You are in the {{ current_page }} page, {{ page_number }} pages in total</p>
+            {% for page in pages %}
+                {% if page == current_page %}
+                    <b>{{ page }}</b>
+                {% else %}
+                    <a href="/movie/movies_list/?page={{ page }}&year={{year}}&genres={{genres}}&review={{review}}" target="_self">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+
+        {% endif %}
+
+        <script>
+            $(function () {
+                $('span.stars').stars();
+            });
+            $.fn.stars = function () {
+                return $(this).each(function () {
+                    $(this).html($('<span />').width(Math.max(0, (Math.min(10, parseFloat($(this).html())))) * 8));
+                });
+            }
+           function  onSelectbtn() {
+            var action_src = '/movie/movies_list/?year=' + document.getElementById("years").value + '&genres=' + document.getElementById("genres").value;
+            window.location = action_src;
+       }
+        </script>
+    </div>
+    </div>
+{% endblock %}

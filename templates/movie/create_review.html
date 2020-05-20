@@ -1,0 +1,51 @@
+<head>
+    <title>Create Review</title>
+</head>
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+<form class="site-form" action="." method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 login-form-1" >
+                <div  style="background-color:#FAFAD2;">
+                    <a><h3><b>Create new Review</b></h3></a>
+                     <a><h3><b> </b></h3></a>
+                     {% if title %}
+                    <a>Movie : <h4 style="color:blue;text-align: center;">{{ title }}</h4></a>
+                     {% endif %}
+                    <div class="form-group">
+                        <a><h5><b>Rating :</b></h5></a>
+
+                        <select id="cars" name="rating" title="Rate" type="text">
+                          <option selected value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                          <option value="9">9</option>
+                          <option value="10">10</option>
+                        </select>
+                    </div>
+                    <div>
+                        <a><h5><b>Comment</b></h5></a>
+                        <textarea name="comment" cols="60" rows="15" title="comment"></textarea>
+                    </div>
+                    {% if request.GET.next %}
+                        <input type="hidden" name="next" value="{{request.GET.next}}" />
+                    {% endif %}
+                    <div class="form-group" align="center">
+                        <input type="hidden" name="movieid" value="{{movieid}}" />
+                        <input type="submit" class="btnSubmit" value="Add Review" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

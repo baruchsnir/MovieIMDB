@@ -1,0 +1,15 @@
+body {
+    background: white;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position:0% 0%;
+}
+.clear-background{
+background-image: none;
+}
+.addbackground {
+    background: white url("../images/movie.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position:0% 0%;
+}

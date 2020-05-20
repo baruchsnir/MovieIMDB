@@ -1,0 +1,38 @@
+<head>
+    <title>Add Actor To Movie</title>
+</head>
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+<form class="site-form" action="." method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 login-form-1" >
+                <div  style="background-color:#FAFAD2;">
+                    <a><h3><b>Add Actor To Movie</b></h3></a>
+                     <a><h3><b> </b></h3></a>
+                        <div class="form-group">
+                            <input type="text" class="form-control"  name="actorid" placeholder="Actor ID *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control"  name="movieid" placeholder="The Movie id *" value="" />
+                        </div>
+                    {% if request.GET.next %}
+                        <input type="hidden" name="next" value="{{request.GET.next}}" />
+                    {% endif %}
+                    <div class="form-group" align="center">
+                        <input type="submit" class="btnSubmit" value="Add Actor to Movie" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+            <div id="dropDownSelect1"></div>
+				{% for message in messages %}
+				<h3 class="message"> {{message}}</h3>
+				{% endfor %}
+			</div>
+    </div>
+</form>
+{% endblock %}

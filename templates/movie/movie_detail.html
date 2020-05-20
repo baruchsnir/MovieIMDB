@@ -1,0 +1,228 @@
+{% extends "../base.html" %}
+{% load static %}
+{% block content %}
+    <div class="Layer" id="layer"></div>
+    <div id="container" style="background-color:#FAFAD2;">
+        {% if movie %}
+
+            <div id="detail-infro">
+                <h1>{{ movie.title }}</h1>
+                {% if  user.is_authenticated %}
+                    <a href="/movie/create_review/?id={{ movie.movieid }}"><button class="add_button" id="addreview" >Add Review</button></a>
+                    <b style="color: #f44336" id="message"></b>
+                    {% if  movie.flag == 1 %}
+                        <script>
+                            $("#seen").css({"background-color": "#f44336", "color": "white"});
+                        </script>
+                    {% endif %}
+                    {% if  movie.flag == 2 %}
+                        <script>
+                            $("#expect").css({"background-color": "#f44336", "color": "white"});
+                        </script>
+                    {% endif %}
+                {% endif %}
+                <script>
+                    $(document).ready(function () {
+                        $("#seen").click(function () {
+                            $.get("/movie/add_seen/{{ movie.movieid }}", function (msg) {
+                                if (msg == "1") {
+                                    $("#seen").css({"background-color": "#f44336", "color": "white"});
+                                    $("#expect").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Added to Seen list!").fadeIn("fast").fadeOut("slow");
+                                }
+                                if (msg == "0") {
+                                    $("#seen").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Deleted from Seen list!").fadeIn("fast").fadeOut("slow");
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $("#expect").click(function () {
+                            $.get("/movie/add_expect/{{ movie.movieid }}", function (msg) {
+                                 if (msg == "2") {
+                                    $("#expect").css({"background-color": "#f44336", "color": "white"});
+                                    $("#seen").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Added to Wish list!").fadeIn("fast").fadeOut("slow");
+                                }
+                                if (msg == "0") {
+                                    $("#expect").css({"background-color": "white", "color": "black"});
+                                    $("#message").html("Deleted from Wish list!").fadeIn("fast").fadeOut("slow");
+                                }
+                            });
+                        });
+                    });
+                </script>
+                <script>
+                    $(function () {
+                        $('span.stars').stars();
+                    });
+                    $.fn.stars = function () {
+                        return $(this).each(function () {
+                            $(this).html($('<span />').width(Math.max(0, (Math.min(10, parseFloat($(this).html())))) * 8));
+                        });
+                    }
+
+                </script>
+                <!-- Layer -->
+                {#  <div class="Layer" id="layer"></div>#}
+
+                <p><b>Year:</b> {{ movie.year }}</p>
+                <p><b>Genres:</b> {{ movie.genres }}</p>
+                <p><b>Movie Length:</b> {{ movie.length }} min</p>
+                <span class="stars">{{ movie.rate }}</span>
+                <p><b>Rating:</b> {{ movie.rate }}</p>
+                <p><a href="http://www.imdb.com/title/{{ movie.movieid }}" target="_blank">See in IMDB <span
+                        class="glyphicon glyphicon-new-window"></span></a></p>
+                <span class="click_Show"> <button class="button_trailer">
+                <span class="glyphicon glyphicon-play-circle"></span> Trailer</button>
+                </span>
+
+                <div id="TrailerWindow" style="position: fixed;">
+                    <div id="title">{{ movie.title }}
+                        <button type="button" class="close" aria-label="Close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                    </div>
+                    <div id="videoControl">
+                        <video width="600" height="500" controls autoplay>
+                            <source src="{{ movie.trailer }}" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+                <p id="summary"><b>Plot Summary: </b>"{{ movie.plot }}"</p>
+                <p id="commentsid">
+                    <table>
+            <tr>
+            <td>
+
+            </td>
+            <td>
+                <h3>Comments</h3>
+            <div class="commentsdetail" id="commentsdetail" style="background-color:white;border: 1px solid black;height: 1000px; width: 630px;">
+                {% if comments %}
+                <table>
+                    {% for review in comments %}
+                    <tr><td><b>{{review.user}}</b></td></tr>
+                    <tr><td><h6> {{review.created_date}}</h6></td></tr>
+                    <tr><td><span class="stars">{{review.rating}}</span></td></tr>
+                    <tr><td><p>{{review.comment}}</p></td></tr>
+                    <tr><td>    </td></tr>
+                    <tr><td>    </td></tr>
+                    <tr><td><a>--------------------------------</a></td></tr>
+                    {% endfor %}
+
+                 </table>
+                <hr>
+                {% endif %}
+            </div>
+            </td>
+               </td>
+            </tr>
+        </table>
+                </p>
+            </div>
+
+            <div id="main-pic">
+                <img border="0" src="{{ movie.poster }}" alt="Cannot load photo, sorry!" width="300" height="500">
+            </div>
+             {% if items %}
+            <h2>Main Actors in the Movie:</h2>
+            {% endif %}
+            <hr>
+        {% endif %}
+
+
+
+        {% for item in items %}
+            <table>
+                <td>
+                    <a href="/movie/actor_detail/?id={{ item.actorid }}" target="_self"><img border="0" src="{{ item.photo }}" alt="Cannot load photo, sorry!" width="220" height="280"
+                                                                                             style="padding: 10px"></a>
+                </td>
+                <td>
+                    <h3><a href="/movie/actor_detail/?id={{ item.actorid }}" target="_self">{{ item.name }}</a></h3>
+                </td>
+            </table>
+            <hr>
+        {% endfor %}
+
+
+
+        <script type="text/javascript">
+            function layersize() {
+                document.getElementById("layer").style.width = document.documentElement.scrollWidth + "px";
+                document.getElementById("layer").style.height = document.documentElement.scrollHeight + "px";
+            }
+
+            $(".click_Show").click(function () {
+                layersize();
+                $(".Layer").show();//show layer
+                $("#TrailerWindow").show();//show videoWindow
+                tm();
+            });
+
+            $(window).resize(function () {
+                layersize();
+                tm();
+            });
+
+            function tm() {
+                var _left = (document.documentElement.clientWidth - $("#TrailerWindow").width()) / 2;//Get distance of left
+                var _top = (document.documentElement.clientHeight) * 0.15;//Get distance of top
+                $("#TrailerWindow").css({left: _left, top: _top});
+            }
+
+            $("button.close").click(function () {
+                $('video').trigger('pause');
+                $("#TrailerWindow").hide();//hide
+                $(".Layer").hide();//hide
+            });
+        </script>
+
+        <!--Drag-->
+        <script type="text/javascript">
+            window.onload = function () {
+                init(document.getElementById("title"));
+            };
+
+            var l = 0, t = 0, x = 0, y = 0;
+            var isOver = false;
+            var zindex = 99999;
+
+            function init(titleDom) {
+                var thisDom = titleDom;
+                var parentDom = thisDom.parentNode;
+                titleDom.onmousedown = function (event) {
+                    var e = event || window.event;
+                    x = e.clientX;
+                    y = e.clientY;
+                    l = parseInt(parentDom.offsetLeft);
+                    t = parseInt(parentDom.offsetTop);
+                    isOver = true;
+                    zindex++;
+                    parentDom.style.zIndex = zindex;
+                    document.onmousemove = function (event) {
+                        if (isOver) {
+                            var e = event || window.event;
+                            var newLeft = l + e.clientX - x;
+                            var newTop = t + e.clientY - y;
+                            parentDom.style.left = newLeft + "px";
+                            parentDom.style.top = newTop + "px";
+
+                        }
+                    };
+                    document.onmouseup = function (event) {
+                        if (isOver) {
+                            isOver = false;
+                        }
+                    };
+                };
+            }
+        </script>
+
+    </div>
+{% endblock %}
+

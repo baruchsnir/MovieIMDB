@@ -1,0 +1,57 @@
+<head>
+    <title>Create Movie</title>
+</head>
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+<form class="site-form" action="." method="post" enctype="multipart/form-data" style="margin-top: 1px;">
+    {% csrf_token %}
+    <div class="container" style="width: 1500px">
+        <div class="row">
+            <div class="col-md-6 login-form-1" >
+                <div  style="background-color:#FAFAD2;">
+                    <a><h3><b>Create New Movie</b></h3></a>
+                     <a><h3><b> </b></h3></a>
+                        <div class="form-group" style="width: 100px;">
+                            <input type="text" class="form-control"  name="movieid" placeholder="Movie ID *" value="" />
+                        </div>
+                        <div class="form-group" style="width: 300px;">
+                            <input type="text" class="form-control"  name="title" placeholder="Title *" value="" />
+                        </div>
+						<div class="form-group" style="width: 100px;">
+                            <input type="text" class="form-control"  name="year" placeholder="Year *" value="" />
+                        </div>
+						<div class="form-group" style="width: 100px;">
+                            <input type="text" class="form-control"  name="length" placeholder="Length *" value="" />
+                        </div>
+                        <div class="form-group"style="width: 300px;">
+							<input type="text" class="form-control" name="genres" placeholder="Geners" value="" />
+                        </div>
+						<div class="form-group"style="10px; width: 100px;">
+							<input type="text" class="form-control" name="rate" placeholder="Rate 1 - 10 *" value="" />
+                        </div>
+						<div class="form-group" style="width: 500px;">
+                             <textarea name="plot" cols="80" rows="4" placeholder="Plot - Some words on the movie *" value=""></textarea>
+	                    </div>
+                    	<div class="form-group"style="width: 500px;">
+							<input type="text" class="form-control" name="poster" placeholder="The Url of the Poster *" value="" />
+                        </div>
+                   	   <div class="form-group" style="width: 500px;">
+							<input type="text" class="form-control" name="trailer" placeholder="The Url of the Trailer *" value="" />
+                        </div>
+                       <div class="form-group" style="width: 500px;">
+							<input type="text" class="form-control" name="actors" placeholder="Actors List *" value="" />
+                        </div>
+                    {% if request.GET.next %}
+                        <input type="hidden" name="next" value="{{request.GET.next}}" />
+                    {% endif %}
+                    <div class="form-group" align="center">
+                        <input type="submit" class="btnSubmit" value="Add Movie" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

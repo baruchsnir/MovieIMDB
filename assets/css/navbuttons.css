@@ -1,0 +1,84 @@
+.back2First{
+    overflow: hidden;
+    z-index: 999;
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    bottom: 50px;
+    right: 0;
+    background-color: #DDD;
+    color: #555;
+    text-align: center;
+    font-size: 30px;
+    text-decoration: none;
+}
+.tdnav{
+   width=20;
+   height=20
+}
+.fixedbtn{
+    z-index: 999;
+    position: fixed;
+    bottom: 50px;
+    right: 0;
+}
+#back2Top {
+    width: 100px;
+    line-height: 20px;
+    overflow: hidden;
+    z-index: 999;
+    display: none;
+    cursor: pointer;
+    position: fixed;
+    bottom: 50px;
+    right: 0;
+    background-color: #DDD;
+    color: #555;
+    text-align: center;
+    font-size: 30px;
+    text-decoration: none;
+}
+.comments{
+    width: 100px;
+    line-height: 20px;
+    overflow: hidden;
+    z-index: 999;
+    display: none;
+    cursor: pointer;
+    right: 100;
+    background-color: #DDD;
+    color: #555;
+    text-align: center;
+    font-size: 30px;
+    text-decoration: none;
+}
+.btnselectmovies {
+    height : 20;
+    width : 70;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: white;
+    background-color: #FAFAD2;
+    border-color: #ccc;
+}
+.backcolor{
+   background-color: #FAFAD2;
+}
+#commentsdetail(
+  text-align: center
+}

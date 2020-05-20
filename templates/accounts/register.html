@@ -1,0 +1,48 @@
+<head>
+    <title>Registration</title>
+</head>
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+    <form  action="{% url 'accounts:register' %}" method="post">
+                {% csrf_token %}
+		<div class="container login-container">
+            <div class="row">
+                <div class="col-md-6 login-form-1">
+                    <div class="form-control-login">
+                        <a class="form-control" style="text-align: center;"><h3>Account Register</h3></a>
+                        <div class="form-group">
+                            <input type="text" class="form-control"  name="first_name" placeholder="Your First Name *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control"  name="last_name" placeholder="Your Last Name *" value="" />
+                        </div>
+						<div class="form-group">
+                            <input type="text" class="form-control"  name="username" placeholder="Your User Name *" value="" />
+                        </div>
+						<div class="form-group">
+                            <input type="text" class="form-control"  name="email" placeholder="Your Email *" value="" />
+                        </div>
+                        <div class="form-group">
+							<input type="password" class="form-control" name="password1" placeholder="Your Password *" value="" />
+                        </div>
+						<div class="form-group">
+							<input type="password" class="form-control" name="password2" placeholder="Confirm Password *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Sign Up" />
+                        </div>
+
+                    </div>
+                </div>
+			</div>
+
+
+			<div id="dropDownSelect1"></div>
+				{% for message in messages %}
+				<h3 class="message"> {{message}}</h3>
+				{% endfor %}
+			</div>
+		</div>
+	</form>
+{% endblock %}

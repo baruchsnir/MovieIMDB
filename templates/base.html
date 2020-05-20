@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Movie-IMDB</title>
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet" id="bootstrap-css">
+    <link href="{% static '/css/navbar.css' %}" rel="stylesheet">
+    <script src="{% static '/js/jquery-1.10.2.min.js.download' %}"></script>
+    <script src="{% static '/js/bootstrap.min.js.download' %}"></script>
+    <link href="{% static '/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static '/css/bootstrap-social.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/login.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/navbuttons.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/index.css' %}">
+
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static '/images/icons/film.png' %}">
+<!--===============================================================================================-->
+    <style type="text/css"></style>
+</head>
+
+<body style="background-color:#FAFAD2;">
+<nav class="navbar navbar-default navbar-inverse" role="navigation" style="margin-bottom: 0">
+    <div class="container-fluid">
+        <div class="navbar-header">
+<!--            <a class="navbar-brand" href="/"><img src="{% static '/images/imdb_logo.png' %}"></a>-->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div><img class="navbar-brand" src="{% static '/images/imdb_logo.png' %}" href="/">
+             <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/movie/movies_list/"><span class="glyphicon glyphicon-film"></span> Movies</a></li>
+                <li><a href="/movie/actors_list/"><span class="glyphicon glyphicon-user"></span> Actors</a></li>
+            </ul>
+            <form class="navbar-form navbar-left" action="{% url 'movie:search' %}" method="GET" value="{{request.GET.q}}">
+                {% csrf_token %}
+
+                <input type="text" name="q" id=" " class="form-control"
+                       placeholder="Search Movies or Actors" value="{{request.GET.q}}"
+                       onkeyup="start_timer()" size="55" autocomplete="off" required/>
+                <input type="submit" name="submit" value="Search" class="btn btn-default"/>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li>
+                        <p class="navbar-text" style="color:#fff9fe;">
+                            Welcome, {{ user.username }}</p></li>
+                    {% if user.is_superuser %}
+                     <li class="dropdown">
+                        <a href="http://bootsnipp-env.elasticbeanstalk.com/iframe/DV3m4#" class="dropdown-toggle"
+                           data-toggle="dropdown">Edit Movies<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/movie/add_movie/">Add Movie</a></li>
+                            <li><a href="/movie/add_actor/">Add Actor</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/movie/add_actor_to_movie/">Add Actor to Movie</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    <li class="dropdown">
+                        <a href="http://bootsnipp-env.elasticbeanstalk.com/iframe/DV3m4#" class="dropdown-toggle"
+                           data-toggle="dropdown">myMovies<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/movie/commentslist/">Comments List</a></li>
+                        </ul>
+                    </li>
+                 <li style="align-items: center">
+                        <a href="/accounts/logout/">Logout</a>
+                    </li>
+                {% else %}
+                    {% if message %}
+                        <li><p class="navbar-text" style="color:red;">{{ message }}</p></li>
+                    {% endif %}
+                    	<li><a href="/accounts/register/">Register</a></li>
+						<li><a href="/accounts/login/">Login</a></li>
+                {% endif %}
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+
+</nav>
+<script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+</script>
+<script>
+    function searchSubmit() {
+        var action_src = '/movie/search/?q=' + document.getElementById('search-input').value ;
+        alert(document.getElementById("search-input").value)
+        window.location  = action_src;
+    }
+
+    $(".form-control").bind('blur', function () {
+        setTimeout(function () {
+            $(".searchlistdiv").hide();
+        }, 150);
+    });
+    var last_input_time = Date.now();
+
+    function start_timer() {
+        var this_input_time = Date.now();
+        last_input_time = this_input_time;
+        setTimeout(
+            function (this_input_time) {
+                if (last_input_time === this_input_time)
+                    str = document.getElementById('search-input').value
+                    showResult(str);
+            }, 150, this_input_time);
+    }
+
+    function showResult(str) {
+        if (str.length === 0) {
+            $(".searchlistdiv").hide();
+            return;
+        }
+        var path = "/movie/search/?q=" + str;
+        window.location  = path;
+        });
+    }
+</script>
+<div class="wrapper">
+  {% block content %}
+  {% endblock %}
+</div>
+{% block mainbody %}
+    {% load static %}
+    <div style=" margin-left: 1%;">
+        <p style="color: white"><b>Recently Popular:</b></p>
+        {% for movie in popular %}
+            <a href="/movie/movie_detail/?id={{ movie.movieid }}"  alt="{{ movie.title }}" >
+                <img id="poster" class="img-rounded" src="{{ movie.poster }}" width="125" height="180"  >
+            </a>
+        {% endfor %}
+    </div>
+    <div style=" margin-left: 1%;">
+        {% for movie in popular1 %}
+            <a href="/movie/movie_detail/?id={{ movie.movieid }}"   alt="{{ movie.title }}">
+                <img id="poster1" class="img-rounded" src="{{ movie.poster }}" width="125" height="180" >
+            </a>
+        {% endfor %}
+    </div>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
+
+{% endblock %}
+
+
+</body>
+</html>

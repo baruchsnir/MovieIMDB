@@ -1,0 +1,40 @@
+<head>
+    <title>IDMB Login</title>
+</head>
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+ <form method="post" action="{% url 'accounts:login' %}">
+        {% csrf_token %}
+		<div class="container login-container">
+            <div class="row">
+                <div class="col-md-6 login-form-1">
+                    <div class="form-control-login">
+                        <a class="form-control" style="text-align: center;"><h3>ACCOUNT LOGIN</h3></a>
+                        <div class="form-group">
+                            <input type="text" class="form-control"  name="username" placeholder="Your User Name *" value="" />
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" placeholder="Your Password *" value="" />
+                        </div>
+                        {% if request.GET.next %}
+                            <input type="hidden" name="next" value="{{request.GET.next}}" />
+                        {% endif %}
+                        <div class="form-group">
+                            <input type="submit" class="btnSubmit" value="Login" />
+                        </div>
+
+                    </div>
+                </div>
+			</div>
+
+
+			<div id="dropDownSelect1"></div>
+				{% for message in messages %}
+				<h3 class="message"> {{message}}</h3>
+				{% endfor %}
+			</div>
+		</div>
+	</form>
+{% endblock %}
+
