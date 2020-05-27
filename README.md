@@ -2,7 +2,7 @@
 Django-ManageWorkers  Building MovieIMDB Web Site
 =========================================
 
-This Project is in DevOpsExprt https://devopsexperts.co.il/%d7%a7%d7%95%d7%a8%d7%a1-%d7%a4%d7%99%d7%99%d7%aa%d7%95%d7%9f/
+This Project is in Course Python in DevOpsExprts https://devopsexperts.co.il/%d7%a7%d7%95%d7%a8%d7%a1-%d7%a4%d7%99%d7%99%d7%aa%d7%95%d7%9f/
 
 How to use it
 -------------

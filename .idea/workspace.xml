@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="33dea584-784f-40f0-970d-9bd622890527" name="Default Changelist" comment="" />
+    <list default="true" id="33dea584-784f-40f0-970d-9bd622890527" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/navbuttons.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/navbuttons.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +22,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1Zfg2t0OmmiPEIHkz5yCcHQTYI9" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -25,6 +30,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="run.code.analysis.last.selected.profile" value="aDefault" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -115,13 +121,29 @@
       <option name="presentableId" value="Default" />
       <updated>1585235358388</updated>
     </task>
+    <task id="LOCAL-00001" summary="Load MovieIMDB project to Giyhub">
+      <created>1589982783506</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1589982783506</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Load MovieIMDB project to Giyhub" />
+    <option name="LAST_COMMIT_MESSAGE" value="Load MovieIMDB project to Giyhub" />
   </component>
   <component name="WindowStateProjectService">
     <state x="532" y="293" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1585236596414">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="532" y="293" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824@0.0.1536.824" timestamp="1585236596414" />
+    <state x="413" y="11" key="CommitChangelistDialog2" timestamp="1589982781020">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="413" y="11" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589982781020" />
     <state width="1515" height="210" key="GridCell.Tab.0.bottom" timestamp="1585387953707">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
