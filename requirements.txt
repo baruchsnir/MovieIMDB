@@ -84,7 +84,7 @@ urllib3==1.24.2
 vboxapi==1.0
 virtualenv==20.0.3
 virtualenv-clone==0.5.3
-waitress==1.4.3
+waitress==2.1.1
 webdriver-manager==2.3.0
 Werkzeug==1.0.0
 whichcraft==0.6.1
