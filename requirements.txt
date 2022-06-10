@@ -15,7 +15,7 @@ Click==7.0
 colorama==0.4.3
 comtypes==1.1.7
 configparser==4.0.2
-cookiecutter==1.7.0
+cookiecutter==2.1.1
 crayons==0.3.0
 defusedxml==0.6.0
 diskcache==2.9.0
