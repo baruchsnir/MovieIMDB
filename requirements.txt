@@ -9,7 +9,7 @@ binaryornot==0.4.4
 boto==2.48.0
 cached-property==1.5.1
 camelcase==0.2
-certifi==2019.3.9
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 colorama==0.4.3
